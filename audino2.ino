@@ -24,6 +24,7 @@ typedef signed long      int32;
 #define OFF     0
 
 void Setup_MotorPin (void);
+void Setup_Bluetooth(void);
  
  
 
@@ -45,10 +46,14 @@ void setup(void)
 { 
   //// Initializing ////
   Setup_MotorPin ();
-    
+  Setup_Bluetooth();
 }
       
  
+void Setup_Bluetooth(void)
+{
+  Serial.begin(9600);     
+ }
 
 void Setup_MotorPin(void)
 {
@@ -176,7 +181,9 @@ void rightturn(void)
 
  void loop(void)
 {
-  
+    int nRecv_Uart = Serial.read();   
+
+  switch(nRecv_Uart)
   {
     case 'w' : forward();   break;
     case 'a' : left();      break;
